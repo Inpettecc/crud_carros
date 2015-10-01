@@ -1,0 +1,24 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+
+repositories {
+	mavenCentral()
+}
+
+sourceSets {
+		main {
+			java {
+				srcDir 'src'
+			}
+		}
+}
+
+eclipse {
+	project {
+		natures 'org.springsource.ide.eclipse.gradle.core.nature'
+	}
+}
+
+dependencies {
+
+}
