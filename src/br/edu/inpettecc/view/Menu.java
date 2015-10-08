@@ -1,8 +1,16 @@
 package br.edu.inpettecc.view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import br.edu.inpettecc.bi.CarrosBI;
+import br.edu.inpettecc.models.Carro;
+import br.edu.inpettecc.models.Marca;
+
 public class Menu {
+	// Para melhor arquitetura esse objeto deveria ser instanciado em uma outra classe,
+	// de preferência na classe Main você instanciaria este objeto e passaria ele para a classe Menu
+	private CarrosBI bi = new CarrosBI();
 
 	public void show() {
 		int opcao = 0;
@@ -47,11 +55,38 @@ public class Menu {
 	}
 
 	private void adicionarCarro() {
-		System.out.println("Adicionar carro.");
+		Scanner sc = new Scanner(System.in);
+		Carro carro = new Carro();
+		List<Marca> marcas = bi.getMarcas();
+		
+		System.out.println("Entre com a cor: ");
+		carro.setCor(sc.nextLine());
+		
+		System.out.println("Entre com o modelo do carro: ");
+		carro.setModelo(sc.nextLine());
+		
+		System.out.println("Escolha a marca: ");
+		for(int i = 0; i < marcas.size(); i++) {
+			System.out.println(i + "- " + marcas.get(i));
+		}
+		carro.setMarca(marcas.get(sc.nextInt()));
+		
+		System.out.println("Entre com o ano: ");
+		carro.setAno(sc.nextLine());
+		
+		bi.adicionarCarro(carro);
 	}
 
 	private void listar() {
-		System.out.println("Listar");
+		System.out.println("Marcas:");
+		for (Marca marca : bi.getMarcas()) {
+			System.out.println(marca);
+		}
+		
+		System.out.println("Carros:");
+		for (Carro carro : bi.getCarros()) {
+			System.out.println(carro);
+		}
 	}
 
 	private void associarPessoaACarro() {
@@ -64,7 +99,15 @@ public class Menu {
 	}
 
 	private void adicionarMarca() {
-		System.out.println("Adicionar marca");
+		Scanner sc = new Scanner(System.in);
+		Marca marca = new Marca();
 		
+		System.out.println("Entre com o nome da Marca: ");
+		marca.setNome(sc.nextLine());
+		
+		System.out.println("Entre com o nome do país de origem: ");
+		marca.setPaisOrigem(sc.nextLine());
+		
+		bi.adicionarMarca(marca);
 	}
 }

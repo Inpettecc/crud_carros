@@ -30,4 +30,11 @@ public class Carro {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
+	@Override
+	public String toString() {
+		return "Carro [cor=" + cor + ", modelo=" + modelo + ", marca=" + marca.getNome()
+				+ ", ano=" + ano + "]";
+	}
+	
+	
 }
